@@ -1,5 +1,7 @@
 package com.example.networkapp
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -42,13 +44,16 @@ class MainActivity : AppCompatActivity() {
         showButton.setOnClickListener {
             downloadComic(numberEditText.text.toString())
         }
+        //
 
     }
+
 
     private fun downloadComic (comicId: String) {
         val url = "https://xkcd.com/$comicId/info.0.json"
         requestQueue.add (
             JsonObjectRequest(url, {showComic(it)}, {
+                Toast.makeText(this, "Error loading comic", Toast.LENGTH_SHORT).show()
             })
         )
     }
@@ -61,3 +66,4 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
